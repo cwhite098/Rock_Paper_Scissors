@@ -49,21 +49,26 @@ AI_win_percent = [];
 draw_percent = [];
 strategy_vec = [];
 
-focus_length = 1;
+focus_length = 100;
 
 rng('shuffle','threefry')
 
-while not(strcmp(player_move,'e'))
+while round_counter < 10000
     
-player_move = input('Choose rock (r), paper (p), scissors (s) or exit (e):\n','s');
-player_move = player_move(1);
-while not(player_move == 'r') && not(player_move == 'p') && not(player_move == 's') && not(player_move == 'e')
-      player_move = input('Choose rock (r), paper (p), scissors (s) or exit (e):\n','s');
-end
+% player_move = input('Choose rock (r), paper (p), scissors (s) or exit (e):\n','s');
+% player_move = player_move(1);
+% while not(player_move == 'r') && not(player_move == 'p') &&
+% not(player_move == 's') && not(player_move =
+%       
+% end
+% 
+% if player_move == 'e'
+%    break 
+% end
 
-if player_move == 'e'
-   break 
-end
+% uncomment below for random player play and change while loop
+
+player_move  = random_agent(previous_move,previous_outcome);
 
 player_move
 
