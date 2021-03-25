@@ -51,12 +51,9 @@ strategy_vec = [];
 
 focus_length = 1;
 
-rng('shuffle','threefry')
-
 while not(strcmp(player_move,'e'))
     
 player_move = input('Choose rock (r), paper (p), scissors (s) or exit (e):\n','s');
-player_move = player_move(1);
 while not(player_move == 'r') && not(player_move == 'p') && not(player_move == 's') && not(player_move == 'e')
       player_move = input('Choose rock (r), paper (p), scissors (s) or exit (e):\n','s');
 end
@@ -67,12 +64,12 @@ end
 
 player_move
 
-if round_counter == 0
+if round_counter == 0 || round_counter == 1
     AI_move = determine_AI_move(previous_move, previous_outcome, 'random')
     fprintf('Strategy: ')
     fprintf('random\n')
 else
-    win_matrix = simulate_AI_agents(player_move, previous_move, previous_outcome, win_matrix);
+
     AI_agent = determine_AI_agent(win_matrix, round_counter, focus_length);
         
     AI_move = determine_AI_move(previous_move, previous_outcome, AI_agent)
@@ -83,6 +80,10 @@ else
 end
 
 [winner,wins] = determine_winner(player_move, AI_move, wins);
+
+if not(round_counter ==0)
+   win_matrix = simulate_AI_agents(player_move, previous_move, previous_outcome, win_matrix); 
+end
 
 if strcmp(winner, 'player')
     fprintf(player_win_message)
