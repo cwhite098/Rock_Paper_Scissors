@@ -8,12 +8,12 @@ length_win_mat = size_win_mat(2);
 
 if length_win_mat - focus_length <= 0
     for row = 1:28
-        sum_of_wins(row,1) = sum(win_matrix(row,:), 'omitnan');
+        sum_of_wins(row, 1) = sum(win_matrix(row,:), 'omitnan');
         win_percent(row, 1) = (sum_of_wins(row)/round_counter)*100;   
     end
 else
     for row = 1:28
-        sum_of_wins(row,1) = sum(win_matrix(row,(end-focus_length):end), 'omitnan');
+        sum_of_wins(row, 1) = sum(win_matrix(row,(end-focus_length):end), 'omitnan');
         win_percent(row, 1) = (sum_of_wins(row)/focus_length)*100;   
     end
 end
