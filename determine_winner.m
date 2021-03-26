@@ -1,5 +1,14 @@
 function [Outcome] = determine_winner(player_move, AI_move)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FUNCTION determine_winner - determines winner given two moves
+% 
+% Input: player_move = 'r', 'p' or 's'
+%        AI_move = 'r', 'p' or 's'
+%        
+% Ouput: Outcome = who wins/draw
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%Convert str to int for moves
 player_move = rps_to_int(player_move);
 AI_move = rps_to_int(AI_move);
 

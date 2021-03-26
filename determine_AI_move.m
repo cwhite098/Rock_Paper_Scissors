@@ -1,4 +1,14 @@
 function AI_move = determine_AI_move(previous_move, previous_outcome, AI_agent)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FUNCTION determine_AI_move - determines the move the AI makes
+% 
+% Input: previous_move = the players previous move
+%        previous_outcome = who won the last round
+%        AI_agent = the AI agent that will be taking the move
+%        
+% Ouput: AI_move = the AI's move, 'r', 'p' or 's'
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %WIN-STAY variations
 if AI_agent == 'random'

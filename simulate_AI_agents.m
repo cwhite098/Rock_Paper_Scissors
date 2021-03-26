@@ -1,4 +1,19 @@
 function win_matrix = simulate_AI_agents(player_move, previous_move, previous_outcome, win_matrix)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FUNCTION simulate_AI_agent - simulates the moves for all the agents to
+% see how they would've done in the previous round and adds this
+% information to the win matrix
+% 
+% Input: player_move = the players move from the round just concluded
+%        previous_move = the player's move from the previous round
+%        previous_outcome = outcome of previous round
+%        win_matrix = the matrix containing win/loss/draw data for all
+%        agents
+%        
+% Ouput: win_matrix = the updated matrix containing win/loss/draw data for 
+%        all agents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %% WIN-STAY variations 
 
 %random agent simulation

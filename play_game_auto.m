@@ -1,5 +1,12 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% play_game_auto
+% 
+% Script for making multi-agent AI play against a random opponent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 clear all;
 
+%Init variables
 player_move = 0;
 previous_move = 0;
 previous_outcome = 0;
@@ -10,6 +17,7 @@ round_counter = 0;
 wins = [0,0,0]; %wins vector, player, AI, draws
 win_matrix = [];
 
+%Reference cell for converting agent str to int
 agent_ref = cell(28,2);
 agent_ref = {1, 'wslfds';
 2, 'random';
@@ -53,20 +61,24 @@ drawing_strategy_vec = [];
 
 focus_length = Inf;
 
-rng('shuffle','philox')
+rng('shuffle','philox') %change the rng for MATLAB
 
+%MAIN LOOP
 while round_counter < 10000
 
+%random agent makes move for player
 player_move  = random_agent(previous_move,previous_outcome);
 
 player_move
 
+%AI plays frist two rounds randomly
 if round_counter == 0 || round_counter == 1
     
     AI_move = determine_AI_move(previous_move, previous_outcome, 'random')
     fprintf('Strategy: ')
     fprintf('random\n')
     
+%Ai plays subsequent moves as one of the agents
 else
     
     AI_agent = determine_AI_agent(win_matrix, round_counter, focus_length);       
@@ -84,6 +96,7 @@ if not(round_counter==0)
     win_matrix = simulate_AI_agents(player_move, previous_move, previous_outcome, win_matrix);
 end
 
+% print win message and record outcome
 if strcmp(winner, 'player')
     fprintf(win_message(1))
     wins(1) = wins(1) + 1;
@@ -114,6 +127,8 @@ for i = 1:28
         end
     end
 end
+
+%find frequency of strategies and whether they win/lose/draw
 for i = 1:28
    frequency(i) = length(find(strategy_vec==i)) ;
    win_frequency(i) = length(find(winning_strategy_vec==i));
@@ -130,6 +145,7 @@ draw_percent(round_counter) = (wins(3)/round_counter)*100;
 
 end
 
+%plot win percentage graphs
 figure(1);
 plot(0:round_counter-1, player_win_percent, '-g', 'LineWidth', 2);
 hold on
@@ -143,7 +159,7 @@ total_frequency(:,1) = win_frequency;
 total_frequency(:,2) = lose_frequency;
 total_frequency(:,3) = draw_frequency;
 
-
+%plot bar charts showing strategy data
 figure();
 hold on
 title('Strategy Performance');
