@@ -40,9 +40,7 @@ agent_ref = {1, 'wslfds';
 27, 'wflsdb';
 28, 'wflsds'};
 
-player_win_message = 'You win!\n';
-AI_win_message = 'You lose!\n';
-draw_message = 'Its a draw\n';
+win_message = ["You win!\n", "You lose!\n", "Its a draw\n"];
 
 player_win_percent = [];
 AI_win_percent = [];
@@ -80,20 +78,21 @@ else
        
 end
 
-[winner,wins] = determine_winner(player_move, AI_move, wins);
+[winner] = determine_winner(player_move, AI_move);
 
 if not(round_counter==0)
     win_matrix = simulate_AI_agents(player_move, previous_move, previous_outcome, win_matrix);
 end
 
 if strcmp(winner, 'player')
-    fprintf(player_win_message)
-end
-if strcmp(winner, 'AI')
-    fprintf(AI_win_message)
-end
-if strcmp(winner, 'draw')
-    fprintf(draw_message)
+    fprintf(win_message(1))
+    wins(1) = wins(1) + 1;
+elseif strcmp(winner, 'AI')
+    fprintf(win_message(2))
+    wins(2) = wins(2) + 1;
+elseif strcmp(winner, 'draw')
+    fprintf(win_message(3))
+    wins(3) = wins(3) + 1;
 end
 
 fprintf('Player wins:%5d. AI wins:%5d. draws:%5d\n', wins(1), wins(2), wins(3))

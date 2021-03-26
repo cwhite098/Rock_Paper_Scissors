@@ -9,9 +9,10 @@ win_matrix = [];
 win_message = ["You win!\n", "You lose!\n", "Its a draw\n"];
 win_percent = [NaN ,NaN ,NaN];
 
-focus_length = 10;
+focus_length = 5;
 
 while in_play
+    
     player_move(round_counter) = [""];
     while not(player_move(round_counter) == 'r') && ...
             not(player_move(round_counter) == 'p') && ...
@@ -24,23 +25,30 @@ while in_play
         in_play = false;
         break
     end
-    % while round_counter < 1000
-    % player_move(round_counter) = randsample(['r','p','s'],1);
     
-    if round_counter == 1
-        AI_move(round_counter) = determine_AI_move(player_move(round_counter), ...
-            outcomes(round_counter), 'random');
+    if round_counter == 1 || round_counter == 2
+        AI_move(round_counter) = determine_AI_move(player_move(1), ...
+            outcomes(1), 'random');
         AI_agent(round_counter) = "Random";
-    else
+    else        
+        AI_agent(round_counter) = determine_AI_agent(win_matrix, round_counter, focus_length);
+        
         win_matrix = simulate_AI_agents(player_move(round_counter), ...
             player_move(round_counter-1), ...
             outcomes(round_counter-1), win_matrix);
-        AI_agent(round_counter) = determine_AI_agent(win_matrix, round_counter, focus_length);
+        
         AI_move(round_counter) = determine_AI_move(player_move(round_counter-1), ...
         outcomes(round_counter-1), AI_agent(round_counter));
     end
+    
     fprintf('AI move: %s Strategy: %s \n', AI_move(round_counter), AI_agent(round_counter));
     [outcomes(round_counter)] = determine_winner(player_move(round_counter), AI_move(round_counter));
+    
+    if round_counter == 2
+       win_matrix = simulate_AI_agents(player_move(round_counter), ...
+            player_move(round_counter-1), ...
+            outcomes(round_counter-1), win_matrix); 
+    end
     
     if strcmp(outcomes(round_counter), 'player')
         fprintf(win_message(1))
@@ -63,3 +71,4 @@ plot(1:round_counter-1, win_percent(:, 1), '-g', ...
     1:round_counter-1, win_percent(:, 3), '-m');
 xlabel('Round Number'); ylabel('Win Percentage');
 legend('Player Win %', 'AI Win %', 'Draw %');
+grid on;
