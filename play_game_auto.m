@@ -59,9 +59,8 @@ winning_strategy_vec = [];
 losing_strategy_vec = [];
 drawing_strategy_vec = [];
 
-focus_length = Inf;
+focus_length = 1;
 
-rng('shuffle','philox') %change the rng for MATLAB
 
 %MAIN LOOP
 while round_counter < 10000
